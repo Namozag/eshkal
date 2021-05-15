@@ -20,14 +20,9 @@ function init() {
 
     listenForWriting();
     listenForOptions();
-    
-    console.log(similarLettersMap);
-
-    // document.getElementById('title').innerText = scrambleWord('إشكال');
 
     function listenForOptions() {
         const optionElements = document.getElementsByClassName("option");
-        console.log(optionElements);
         for (let i = 0; i < optionElements.length; i++) {
             optionElements[i].onchange = () => apply();
         }
@@ -97,13 +92,11 @@ function init() {
 }
 
 function readOptions() {
-    console.log('readOptions');
     options.similar = document.getElementById('option-similar').checked;
     options.root = document.getElementById('option-nodots').checked;
     options.english = document.getElementById('option-english').checked;
     options.tashkeel = document.getElementById('option-tashkeel').checked;
     options.fasel = document.getElementById('option-fasel').checked;
-    console.log(options.similar);
 }
 
 function apply() {
@@ -111,7 +104,6 @@ function apply() {
     const inputElement = document.getElementById("in");
     const outputElement = document.getElementById("out");
     const inputValue = inputElement.value;
-    // console.log(inputValue);
     const outputValue = scrambleText(inputValue);
     outputElement.value = outputValue;
 }
@@ -121,7 +113,6 @@ function scrambleText(original) {
     let output = "";
     for (let i = 0; i < words.length; i++) {
         const wordOut = scrambleWord(words[i])
-        // console.log(words[i], wordOut);
         output += wordOut;
         if (i < words.length - 1) {
             output += " ";
