@@ -1,0 +1,112 @@
+<html dir="rtl">
+    <head>
+        <title>إشكال</title>
+        <link rel="stylesheet" href='https://cdn.jsdelivr.net/npm/plume-css@1.0.5/lib/plume-all.min.css'>
+
+        <style>
+            @import url(https://fonts.googleapis.com/earlyaccess/droidarabickufi.css);
+
+            :root {
+                --pm-button-rounded-size: 150px;
+                --pm-primary-color: green;
+                --pm-secondary-color: yellow;
+                --pm-font-family-primary: 'Droid Arabic Kufi';
+                --pm-font-family-secondary: 'serif';
+                --pm-button-font-size: '300px'
+            }
+
+
+            h1.title {
+                direction:rtl;
+                color:#444;
+                font-size: 40pt;
+                font-family: 'Droid Arabic Kufi', serif;
+            }
+            .kufi {
+                direction:rtl;
+                color:#444;
+                font-family: 'Droid Arabic Kufi', serif;
+            }
+            textarea.main-text {
+                height: 50%;
+                font-size: 30;
+            }
+            .flex-container {
+                display: flex;
+            }
+
+            button.action {
+                /* font-size: 100px; */
+                width: 300px;
+                height: 300px;
+            }
+
+            .flex-container {
+                display: flex;
+            }
+
+            .flex-container > div {
+                margin: 10px;
+            }
+        </style>
+
+    </head>
+    <body onload="init()" class="plume kufi">
+
+
+        <div class="flex-container pm-container" style="height: 90%;">
+            <div style="flex-grow: 1">
+                <h1 id='title' class='title'>إشڴاڵ</h1>
+
+                <div>
+                    <button id="apply" class="pm-btn-round pm-btn-primary action" onclick="apply()">إشكال</button>
+                </div>
+
+                <div>
+                    <div title="استبدال الحروف الأصلية للكلمة بحروف شبيهة">
+                        <input type="checkbox" class="option" id="option-similar" /> تمويه
+                    </div>
+                    <div title="إخفاء نقاط الحروف">
+                        <input type="checkbox" class="option" id="option-nodots" checked="checked" /> لا نقاط
+                    </div>
+                    <div title="إضافة بعض الحروف الإنجليزية بدلاً من الحروف العربية">
+                        <input type="checkbox" class="option" id="option-english" /> فرنكة
+                    </div>
+                    <div title="إضافة تشكيل عشوائي للكلمة">
+                        <input type="checkbox" class="option" id="option-tashkeel" /> تشكيل
+                    </div>
+                    <div title="إضافة فواصل عشوائية بين أحرف الكلمة">
+                        <input type="checkbox" class="option" id="option-fasel" /> فواصل
+                    </div>
+                </div>
+
+                <hr />
+                <div>
+                    <div style="width: 170px; font-size: 14px;">
+                        إشكال تساعدك على جعل كلماتك العربية أكثر غموضاً
+                        <br />
+                        الأداة بدائية وليست مضمونة في جعل كلماتك مستعصية على القراءة الآلية للنصوص ولكنها تزيد من صعوبة الأمر وقد تساعد على الإشكال في الفهم للآلة مع الحفاظ قدر الإمكان في الوضوح للبشر
+                        <br />
+                        يتم تجاهل الكلمات المكونة من ثلاثة حروف فأقل والكلامات البادئة بعلامة #
+                    </div>
+                </div>
+
+            </div>
+            
+            <div style="flex-grow: 11" >
+
+                <div>
+                    <textarea id='in' class="main-text">"ما أخذ بالقوة لا يسترد إلا بالقوة".. خطيب الجمعة على منبر الجامع الأزهر أحمد عمر هاشم يدعو حكام العرب للوقوف في وجه الاعتداء على المسجد الأقصى</textarea>
+                </div>
+                
+                <div>
+                    <textarea id='out' class="main-text" readonly='true'></textarea>
+                </div>
+
+            </div>
+        </div>
+        
+        <script src="eshkal.js"></script>
+    </body>
+    
+</html>
