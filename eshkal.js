@@ -13,6 +13,16 @@ const options = {
 const tashkeelat = ['َ', 'ً', 'ُ', 'ٌ', 'ِ', 'ٍ', 'ْ', 'ّ'];
 const fawasel = [' ', ',', '.', 'ـ', '~', '،'];
 
+let finalOutputText = "";
+const copyLabel = "نسخ للحافظة"; 
+const doneLabel = "تم النسخ"
+
+const inputElement = document.getElementById("in");
+const outputElement = document.getElementById("out");
+const copyElement = document.getElementById("copy");
+
+
+
 function init() {
     initRootShapeLetterMap();
     initSimilarLettersMap();
@@ -101,11 +111,11 @@ function readOptions() {
 
 function apply() {
     readOptions();
-    const inputElement = document.getElementById("in");
-    const outputElement = document.getElementById("out");
     const inputValue = inputElement.value;
-    const outputValue = scrambleText(inputValue);
-    outputElement.value = outputValue;
+    finalOutputText = scrambleText(inputValue);
+    outputElement.value = finalOutputText;
+    // change title of copy button 
+    changeButtonLabel(copyElement, copyLabel);
 }
 
 function scrambleText(original) {
@@ -152,7 +162,7 @@ function scrambleWord(original) {
 function switchChar(c, wordContext) {
 
     let out = c;
-    
+
     if (wordContext.canChangeShape() && options.english && !wordContext.englishCharacterReplaced && arabicToEnglishMap[c] && probabilityOf(2)) {
         out = arabicToEnglishMap[c];
         wordContext.englishCharacterReplaced = true;
@@ -179,6 +189,23 @@ function switchChar(c, wordContext) {
 
     return out;
 }
+
+function copyToClipBoard() {
+    if (!navigator.clipboard) {
+        return;
+    }
+    console.log('Async: Copying to clipboard was successful!');
+    navigator.clipboard.writeText(finalOutputText).then(function () {
+        changeButtonLabel(copyElement, doneLabel);
+    }, function (err) {
+        console.error('Async: Could not copy text: ', err);
+    });
+}
+
+function changeButtonLabel(element, text){
+        element.innerText = text;
+}
+
 
 function probabilityOf(lessThan) {
     return Math.floor(Math.random() * lessThan) == 0;
