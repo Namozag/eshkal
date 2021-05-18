@@ -11,7 +11,7 @@ const options = {
 }
 
 const tashkeelat = ['َ', 'ً', 'ُ', 'ٌ', 'ِ', 'ٍ', 'ْ', 'ّ'];
-const fawasel = [' ', ',', '.', 'ـ', '~', '،'];
+const fawasel = [' ', ',', '.', 'ـ', '،'];
 
 let finalOutputText = "";
 const copyLabel = "نسخ للحافظة"; 
@@ -94,7 +94,6 @@ function init() {
         arabicToEnglishMap['س'] = 's';
         arabicToEnglishMap['ف'] = 'f';
         arabicToEnglishMap['ك'] = 'k';
-        // arabicToEnglishMap['ل'] = 'l';
         arabicToEnglishMap['م'] = 'm';
         arabicToEnglishMap['ن'] = 'n';
         arabicToEnglishMap['ه'] = 'h';
@@ -112,17 +111,17 @@ function readOptions() {
 function apply() {
     readOptions();
     const inputValue = inputElement.value;
-    finalOutputText = scrambleText(inputValue);
+    finalOutputText = convertText(inputValue);
     outputElement.value = finalOutputText;
     // change title of copy button 
     changeButtonLabel(copyElement, copyLabel);
 }
 
-function scrambleText(original) {
+function convertText(original) {
     const words = original.split(" ");
     let output = "";
     for (let i = 0; i < words.length; i++) {
-        const wordOut = scrambleWord(words[i])
+        const wordOut = convertWord(words[i])
         output += wordOut;
         if (i < words.length - 1) {
             output += " ";
@@ -131,7 +130,7 @@ function scrambleText(original) {
     return output;
 }
 
-function scrambleWord(original) {
+function convertWord(original) {
     if (original.charAt(0) === '#') {
         return original;
     }
@@ -149,7 +148,7 @@ function scrambleWord(original) {
     }
 
     for (let i = 0; i < original.length; i++) {
-        const out = switchChar(original.charAt(i), wordContext);
+        const out = convertChar(original.charAt(i), wordContext);
         if (original.charAt(i) === 'ه') {
             wordContext.skipShapeChange = true;
             wordContext.skipNextLetterAppend = true;
@@ -159,15 +158,15 @@ function scrambleWord(original) {
     return output;
 }
 
-function switchChar(c, wordContext) {
+function convertChar(c, wordContext) {
 
     let out = c;
-
-    if (wordContext.canChangeShape() && options.english && !wordContext.englishCharacterReplaced && arabicToEnglishMap[c] && probabilityOf(2)) {
+    
+    if (options.root && rootShapeLetterMap[c]) {
+        out = rootShapeLetterMap[c];
+    } else if (wordContext.canChangeShape() && options.english && !wordContext.englishCharacterReplaced && arabicToEnglishMap[c] && probabilityOf(2)) {
         out = arabicToEnglishMap[c];
         wordContext.englishCharacterReplaced = true;
-    } else if (options.root && rootShapeLetterMap[c]) {
-        out = rootShapeLetterMap[c];
     } else if (wordContext.canChangeShape() && options.similar && similarLettersMap[c] && probabilityOf(2)) {
         out = similarLettersMap[c][random(similarLettersMap[c].length)];
     }
