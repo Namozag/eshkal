@@ -1,5 +1,7 @@
 # eshkal
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/9ee70894-a1a7-4712-b698-9f76e7035621/deploy-status)](https://app.netlify.com/sites/eshkal/deploys)
+
  [Link](https://eshkal.netlify.app/) إشكال تساعدك على جعل كلماتك العربية أكثر غموضاً
 
 الأداة بدائية وليست مضمونة في جعل كلماتك مستعصية على القراءة الآلية للنصوص ولكنها تزيد من صعوبة الأمر وقد تساعد على الإشكال في الفهم للآلة مع الحفاظ قدر الإمكان في الوضوح للبشر
